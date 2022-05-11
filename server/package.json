@@ -1,0 +1,27 @@
+{
+  "name": "server",
+  "version": "2.0.2",
+  "description": "notre serveur de projet de fin ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pfe",
+    "URH"
+  ],
+  "author": "elmousaaaif elaimari chaaay",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-server": "^2.12.0",
+    "apollo-server-express": "^2.12.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "graphql": "^15.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.10",
+    "shortid": "^2.2.15",
+    "subscriptions-transport-ws": "*"
+  }
+}

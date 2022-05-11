@@ -1,0 +1,45 @@
+.error-icon{
+    background : #d50000 !important;
+    color: white !important
+}
+.error-input{
+    border: 2px solid red !important
+}
+.error-input::placeholder{
+    color : red
+}
+
+/*registeration steps*/
+.active-tab{
+        background-color: #0f329b !important
+}
+/*registeration steps*/
+#NavItem{
+    padding: 0.25em;
+    font-family : 'Open Sans Semibold';
+    font-size : 1.2em;
+    margin-top : 0em;
+    text-transform : capitalize;
+}
+
+/*input*/
+.input-text.error {
+	background-color: #fed8d8;
+	border-bottom: 2px solid !important;
+	border-color: red !important;
+}
+i.error-input {
+	background-color: #f31e1e;
+	border: 2px solid !important;
+	border-color: #ee8989 !important;
+	color: white;
+	font-size: 30px;
+}
+.error-msg {
+	margin-top: -20px;
+	margin-bottom: 15px;
+	background-color: #fed8d8;
+	color: red;
+	padding-left: 50px;
+	font-size: 14px;
+}

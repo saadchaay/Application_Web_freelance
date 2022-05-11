@@ -1,0 +1,300 @@
+type Account{
+    id: ID!
+    Email: String!
+    userName: String!
+    passWord: String!
+    Rating: Int!
+    Media: [String]!
+    typeUser: String!
+    Freelancer: User
+    Company: Company
+    dateJoin: String!
+    tele: Int!
+    Location: String
+    Notification: [Notification]!
+    Uploads: [Uploaded]!
+    lastUpdate: String!
+    lastLogin: String!
+    Token: String!
+    Conversations: [Conversation]!
+    BookMarkJobs: [BookMarkJob]!
+    BookMarkUser: [BookMarkUser]!
+    BookMarkCompany: [BookMarkCompany]!
+    Verified: Boolean!
+}
+type User{
+    id: ID!
+    Account: Account!
+    FirstN:  String!
+    LastN: String!  
+    Birth: String!
+    TagLine: TagLine!
+    Description: String
+    Gender:  String!
+    Avatar:  Image!
+    Skills:  [Skill]!
+    BidsWon: [Task]!
+    JobApplied: [Job]!
+    Attachement: [Uploaded]!
+    Token: String!
+}
+type Company{
+    id: ID!
+    Accout: Account!
+    Name: String!
+    createdAt: String!
+    Location: String!
+    Domaine: [String]
+    Avatar: Image!
+    Fax: Int!
+    openPosition: [Job]!
+    Tasks: [Task]!
+    Reviews: [Review]!
+    SiteWeb: [String]!
+    Token: String!
+}
+type Job{
+    id: ID!
+    Poster: Account!
+    Title: String!
+    Description: String
+    createdAt: String!
+    Salary: String!
+    Location: String!
+    Type: String!
+    Categorie: [Skill]!
+    Tags: [String]!
+    Attachement: [Uploaded]!
+    Candidates: [Candidate]!
+    statut: String!
+    CandidateAccepted: [User]!
+}
+type Task{
+    id: ID!
+    Poster: Account!
+    Title: String!
+    Budget: String!
+    typePrice: String!
+    Description: String!
+    Skills: [Skill]!
+    Attachement: [Uploaded]!
+    createdAt: String!
+    Date: String!
+    Delai: {
+        number: String!
+        type: String!
+    }
+    Biddings: [BiddingTask]!
+    AcceptedFor: User
+    AcceptedAt: String
+}
+type Message{
+    id: ID!
+    Conversation: Conversation!
+    Emetteur: Account!
+    createdAt: String!
+    Body: String!
+    Vue: Boolean
+    Deleted: Boolean!
+}
+type Conversation{
+    id: ID!
+    Acc1: Account! 
+    Messages: [Message]!
+    Acc2: Account!
+    beginAt: String!
+    lastSeen: String!
+}
+type Uploaded{
+    id: ID!
+    Account: Account!
+    Name: String!
+    url: String!
+    createdAt: String!
+}
+type Image{
+    id: ID!
+    URL: String!
+    belongTo: Account!
+    createdAt: String!
+}
+type  Notification{
+    id: ID!
+    sendTo: Account!
+    createdAt: String!
+    Vue: Boolean!
+}
+type BiddingTask{
+    id: ID!
+    Task: Task!
+    Bidder: Account!
+    biddedAt: String!
+    Rate: Float!
+    deliveryTime: {
+        number: String!
+        type: String!
+    }
+}
+type Candidate{
+    id: ID!
+    Candidate: Account!
+    Job: Job!
+    createdAt: String!
+}
+
+type Review{
+    id: ID!
+    Reviewer: Account!
+    Reviewed: Account!
+    Time: String!
+    Budget: String!
+    Comment: String!
+    Rating: Int!
+    createdAt: String!
+}
+type BookMarkJob{
+    id: ID!
+    Job: Job!
+    createdAt: String!
+}
+type BookMarkUser{
+    id: ID!
+    Freelancer: User!
+    createdAt: String!  
+}
+type BookMarkCompany{
+    id: ID!
+    Company: User!
+    createdAt: String!  
+}
+type Note{
+    id: ID!
+    Account: Account!
+    Priorety: String!
+    Content: String!
+    createdAt: String!
+}
+type Skill{
+    id: ID!
+    Name: String!
+}
+type TagLine{
+    id: ID!
+    Account: Account!
+    Content: String!
+}
+
+type Query{
+    getFreelancer(accID: ID!): User!
+    getFreelancers: [User]!
+
+    getCompany(comID: ID!): Company!
+    getCompanies: [Company]!
+
+    getJobs: [Job]!
+    getJob(jobID: ID!): Job!
+    getCandidates(jobID: ID!): [Candidate]!
+
+    getTasks: [Task]!
+    getTask(taskID: ID!): Task!
+    getBidding(taskID: ID!): [BiddingTask]!
+
+    getConversations: [Conversation]!
+    getConversation(convID: ID!): Conversation!
+    getMessages(convID: ID!): [Message]!
+
+        getBookMarkJobs: [BookMarkJob]!
+        getBookMarkUsers: [BookMarkUser]!
+        getBookMarkCompanies: [BookMarkCompany]!
+
+        getNotes: [Note]!
+        getReviews: [Review]!
+        
+        getNotifications: [Notification]!
+    }
+    type Mutation{
+        addFreelancer(registerInput: registerInputUser): Account!
+        addCompany(registerInput: registerInputCompany): Account!
+        Login(userName: String!, Password: String!): Account!
+        Logout(userName: String!): Boolean!
+        
+        postJob(registerInput: formJob): Job!
+        deleteJob(jodID: ID!): String!
+        applyJob(jobID: ID!,Name: String!,Email: String!): Candidate! 
+
+        postTask(registerInput: formTask): Task!
+        deleteTask(taskID: ID!): Boolean!
+        bidTask(bidInput: bidTask): BiddingTask!
+
+        addConversation(acc2: String!): Conversation!
+        deleteConversation(idConv: ID!): Boolean!
+        addMessage(body: String!,convID: ID!): Message!
+
+        searchJob(name: String): [Job]!
+        searchTask(name: String): [Task]!
+
+        leaveReview(reviewed: Account!,budget: String!,time: String! ,ratin: Number!, comment: String!): Review!
+        addNote(prirety: String!,note: String!): Note!
+
+        //TODO: 
+        editJob(id: ID!): Job!
+        editTask(id: ID!): Task!
+        deleteCandidate(id: ID!): Boolean!
+        acceptBidder(): Task!
+        addSkill()
+        setHourRate()
+        addAttachement()
+        setTagLine()
+        setNationality()
+        setPassword()
+        setImage()
+        setStatus()
+        updatePassword(id: ID!)
+    }
+    input registerInputUser{
+        userName: String!
+        Email: String!
+        Password: String!
+        Birth: String!
+        Gender: String!
+        FirstN: String!
+        LastN: String!
+        tele: String!
+    }
+    input registerInputCompany{
+        userName: String!
+        Email: String!
+        Password: String!
+        createdAt: String!
+        Name: String!
+        tele: String!
+    }
+    input formJob{
+        Title: String!
+        Description: String!
+        Salary: String!
+        Location: String!
+        Type: String!
+        Categorie: String!
+        Tags: [String]!
+    }
+    input formTask{
+        Name: String!
+        Categorie: String!
+        Location: String!
+        Budget: String!
+        typePrice: String!
+        Skills: String!
+        Description: String!
+        Delai: String!
+    }
+    input bidTask{
+        taskID: ID!
+        bidder: String!
+        rate: String!
+        deliveryTime: String!
+    }
+    input getUser{
+        typeAcc: String!
+        id: ID!
+    }

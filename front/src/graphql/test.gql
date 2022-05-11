@@ -1,0 +1,43 @@
+gql`
+    mutation login($Username: String! $Password: String!){
+        login(Username: $Username Password: $Password){ 
+            ID 
+            Username 
+            Email
+            token
+            TypeCompte
+            LastLogin
+            EmailToken
+        }
+    }
+`;
+gql`
+    mutation register_utilisateur
+    ($Email: String! $Nom: String! $Prenom: String! $Sexe: String! $DateNaissance: String! $Username: String! $Password: String!){
+        AddUtilisateur(Email: $Email Nom: $Nom Prenom: $Prenom Sexe: $Sexe DateNaissance: $DateNaissance Username: $Username Password: $Password)
+    }
+`;
+gql`
+    mutation register_entreprise
+    (Email: String! Denomination: String! ,StatueJuridique: String! ,DateCreation: String! ,Username: String! ,Password: String! ){
+        addEntreprise(Email: $Email Denomination: $Denomination StatueJuridique: $StatueJuridique DateCreation: $DateCreation Username :$Username Password: $Password)
+    }
+`;
+gql`
+    query getTopCategories($limit: Int){
+        getCategories(limit:$limit orderBy: "NbrUtilisations"){
+            Titre
+            Icon
+            NbrUtilisations
+        }
+    }
+`;
+gql`
+    query getTopCategories($limit: Int){
+        getCategories(limit:$limit orderBy: "NbrUtilisations"){
+            Titre
+            Icon
+            NbrUtilisations
+        }
+    }
+`;
